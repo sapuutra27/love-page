@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Surat Cinta Interaktif</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #ffe6e6, #fff);
+            font-family: 'Segoe UI', sans-serif;
+            color: #b30059;
+        }
+        #introSection, #letterSection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        #letterSection { display: none; }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ff66a3;
+            border-radius: 5px;
+            outline: none;
+            width: 200px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ff66a3;
+            color: white;
+            cursor: pointer;
+        }
+        .letter-box {
+            background: #fff0f5;
+            border: 2px dashed #ff66a3;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            box-shadow: 0 0 15px rgba(255, 0, 102, 0.2);
+        }
+        .heart {
+            font-size: 50px;
+            animation: pulse 1s infinite;
+            display: block;
+            margin: 0 auto;
+        }
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50%     { transform: scale(1.2); }
+        }
+        p {
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: Masukkan nama -->
+    <div id="introSection">
+        <h1>Hai, siapa namamu?</h1>
+        <input type="text" id="nameInput" placeholder="Tulis namamu di sini" />
+        <button onclick="startLetter()">Mulai</button>
+    </div>
+
+    <!-- Section 2: Surat cinta -->
+    <div id="letterSection">
+        <div class="letter-box">
+            <span class="heart">❤️</span>
+            <h1 id="letterTitle"></h1>
+            <div id="letterBody"></div>
+            <span class="heart">❤️</span>
+        </div>
+    </div>
+
+    <!-- Musik latar -->
+    <audio id="bgmusic" src="bgmusic.mp3" preload="auto"></audio>
+
+    <script>
+        function startLetter() {
+            const name = document.getElementById('nameInput').value.trim() || 'Kamu';
+            // isi surat panjang
+            const paragraphs = [
+                `Untuk ${name},`,
+                `Aku tak pernah berpikir akan menemukan seseorang yang membuat setiap detik terasa berarti—hingga aku menemukanmu.`,
+                `Saat aku menulis baris kode, bayangmu selalu menari di layar hatiku. Variabel hidupku telah kauisi dengan tawa dan senyumanmu.`,
+                `Setiap kali aku merancang fungsi baru, fungsi terindah yang pernah ada adalah fungsi "bersamamu()".`,
+                `Cintaku padamu ibarat loop tak berujung: selalu berulang, tanpa pernah timeout.`,
+                `Kalau rasa ini sebuah aplikasi, aku harap kamu tak pernah menekan tombol "Close". Sebab aku ingin berjalan di background hatimu selamanya.`,
+                `Terima kasih telah menjadi konstanta yang membuat segala yang kujalankan menjadi sempurna.`,
+                `Dengan sepenuh hati,`, 
+                `— Put`
+            ];
+            // tampilkan
+            document.getElementById('letterTitle').innerText = `Dear ${name},`;
+            const bodyDiv = document.getElementById('letterBody');
+            bodyDiv.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+            // switch section
+            document.getElementById('introSection').style.display = 'none';
+            document.getElementById('letterSection').style.display = 'flex';
+            // play music
+            const audio = document.getElementById('bgmusic');
+            audio.play().catch(_=>{ /* autoplay mungkin diblokir */ });
+        }
+    </script>
+
+</body>
+</html>
