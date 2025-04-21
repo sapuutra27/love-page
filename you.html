@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Surat Cinta Interaktif</title>
+    <style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', monospace;
+    background-color: #0f0f0f;
+    color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1, h2 {
+    color: #ff6b81;
+  }
+
+  .container {
+    max-width: 800px;
+    margin-top: 40px;
+  }
+
+  button {
+    background-color: #ff6b81;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 16px;
+  }
+
+  button:hover {
+    background-color: #ff4757;
+  }
+
+  audio {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+    <!-- Section 1: Masukkan nama -->
+    <div id="introSection">
+        <h1>Hai, siapa namamu?</h1>
+        <input type="text" id="nameInput" placeholder="Tulis namamu di sini" />
+        <button onclick="startLetter()">Mulai</button>
+    </div>
+
+    <!-- Section 2: Surat cinta -->
+    <div id="letterSection">
+        <div class="letter-box">
+            <span class="heart">❤️</span>
+            <h1 id="letterTitle"></h1>
+            <div id="letterBody"></div>
+            <span class="heart">❤️</span>
+        </div>
+    </div>
+
+    <!-- Musik latar -->
+    <audio id="bgmusic" src="bgmusic.mp3" preload="auto"></audio>
+
+    <script>
+        function startLetter() {
+            const name = document.getElementById('nameInput').value.trim() || 'Kamu';
+            // isi surat panjang
+            const paragraphs = [
+  `Untuk ${name},`,
+  `Aku mungkin bukan yang pandai berkata manis, tapi lewat halaman kecil ini aku ingin kamu tahu… ada seseorang yang selalu memikirkanmu diam-diam.`,
+  `Hari-hari yang biasa jadi luar biasa sejak kehadiranmu. Kamu seperti baris kode yang menutup bug di dalam hatiku. Ada ketenangan yang muncul setiap kali aku ingat kamu.`,
+  `Namamu tersimpan rapi di memori, dan setiap langkah yang kuambil seolah dituntun oleh bayangmu. Kamu bukan sekadar hadir—kamu jadi alasan di balik senyum-senyum kecil yang tak bisa kujelaskan.`,
+  `Andai hatiku ini sebuah website, kamu adalah halaman utama yang selalu ingin kuakses pertama kali. Kamu itu HTML-ku: tanpa kamu, strukturnya nggak lengkap. Kamu juga CSS-ku: yang memperindah semuanya. Dan kamu itu JavaScript-ku: yang bikin hatiku interaktif dan hidup.`,
+  `Setiap malam sebelum tidur, aku cuma bisa berharap... semoga kamu tahu, kalau ada seseorang di dunia ini yang merasa beruntung hanya karena bisa mengenalmu.`,
+  `Kadang aku takut: takut kamu tak merasa hal yang sama. Tapi lebih dari itu, aku bahagia. Karena tanpa harus memiliki pun, mencintaimu sudah cukup bikin aku merasa utuh.`,
+  `Kamu itu seperti sunrise—nggak pernah bosan ditungguin, selalu bikin tenang, dan kehadirannya ngasih semangat baru. Aku harap suatu hari kamu tahu, bahwa sejak lama, kamu sudah jadi inspirasiku.`,
+  `Terima kasih, karena pernah hadir di hidupku, walaupun mungkin hanya sebentar. Tapi selama itu, kamu sudah jadi bagian terindah dari perjalanan ini.`,
+  `— Put`
+];
+            // tampilkan
+            document.getElementById('letterTitle').innerText = `Dear ${name},`;
+            const bodyDiv = document.getElementById('letterBody');
+            bodyDiv.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+            // switch section
+            document.getElementById('introSection').style.display = 'none';
+            document.getElementById('letterSection').style.display = 'flex';
+            // play music
+            const audio = document.getElementById('bgmusic');
+            audio.play().catch(_=>{ /* autoplay mungkin diblokir */ });
+        }
+    </script>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', monospace;
+    background-color: #0f0f0f;
+    color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1, h2 {
+    color: #ff6b81;
+  }
+
+  .container {
+    max-width: 800px;
+    margin-top: 40px;
+  }
+
+  button {
+    background-color: #ff6b81;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 16px;
+  }
+
+  button:hover {
+    background-color: #ff4757;
+  }
+
+  audio {
+    display: none;
+  }
+</style>
+</body>
+</html>
