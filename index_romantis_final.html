@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Halaman Romantis</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+    #inputContainer {
+      margin-bottom: 20px;
+    }
+    input, button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #ff5c8a;
+      color: white;
+      cursor: pointer;
+    }
+    .sticker {
+      width: 100px;
+      margin: 20px 0;
+      display: none;
+    }
+    #text {
+      font-size: 20px;
+      opacity: 0;
+      transition: opacity 2s ease;
+      padding: 0 20px;
+      max-width: 600px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="inputContainer">
+    <p>Hai kamu, siapa namamu?</p>
+    <input type="text" id="nameInput" placeholder="Masukkan nama kamu..." />
+    <button onclick="start()">Mulai</button>
+  </div>
+
+  <img src="kwon1.png" alt="Kwon Yuli" class="sticker" id="topSticker">
+  <div id="text"></div>
+
+  <audio autoplay loop>
+    <source src="bgmusic.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <script>
+    const textEl = document.getElementById('text');
+    const topSticker = document.getElementById('topSticker');
+    const inputContainer = document.getElementById('inputContainer');
+    const nameInput = document.getElementById('nameInput');
+
+    let i = 0;
+    let texts = [];
+
+    function start() {
+      const name = nameInput.value.trim() || "Kamu";
+
+      texts = [
+        `Hai ${name}, ada sesuatu yang ingin aku sampaikan...`,
+        "Masih inget nggak waktu kita pertama kali ketemu?",
+        "Waktu itu aku nggak nyangka kalau pertemuan itu bakal jadi berarti.",
+        "Aku masih inget caramu senyum, dan gimana kamu bikin suasana jadi lebih hangat.",
+        "Hari-hari kita bareng tuh... sederhana, tapi rasanya lengkap.",
+        "Kita pernah ketawa bareng cuma gara-gara hal sepele.",
+        "Aku nyaman, aku tenang, aku bahagia.",
+        "Walau sekarang mungkin udah nggak bareng lagi, aku selalu simpan kenangan itu baik-baik.",
+        "Kamu pernah jadi bagian paling indah dalam hidupku.",
+        "Dan meskipun semua udah jadi masa lalu... aku tetap bersyukur pernah kenal kamu.",
+        "Terima kasih ya, udah hadir. Meski sebentar, rasanya dalam.",
+        "Semoga kamu bahagia, selalu."
+      ];
+
+      const audio = new Audio('bgmusic.mp3');
+      audio.loop = true;
+      audio.play();
+
+      inputContainer.style.display = 'none';
+      topSticker.style.display = 'block';
+      textEl.style.display = 'block';
+      textEl.textContent = texts[0];
+      textEl.style.opacity = 1;
+      i = 1;
+
+      setInterval(showNext, 7000);
+    }
+
+    function showNext() {
+      textEl.style.opacity = 0;
+      setTimeout(() => {
+        textEl.textContent = texts[i];
+        textEl.style.opacity = 1;
+        i = (i + 1) % texts.length;
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
