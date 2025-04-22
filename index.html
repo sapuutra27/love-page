@@ -8,10 +8,6 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #0d0d0d;
-      background-image: url('https://raw.githubusercontent.com/sapuutra27/love-page/main/stars.png');
-      background-repeat: repeat;
-      animation: moveStars 100s linear infinite;
       color: #ffffff;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
@@ -21,11 +17,17 @@
       flex-direction: column;
       text-align: center;
       overflow: hidden;
+      position: relative;
+      z-index: 0;
     }
 
-    @keyframes moveStars {
-      from { background-position: 0 0; }
-      to { background-position: 10000px 5000px; }
+    #bgVideo {
+      position: fixed;
+      top: 0; left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
     }
 
     #inputContainer {
@@ -63,6 +65,10 @@
   </style>
 </head>
 <body>
+  <video autoplay muted loop id="bgVideo">
+    <source src="stars_background.mp4" type="video/mp4">
+  </video>
+
   <div id="inputContainer">
     <p>Hai kamu, siapa namamu?</p>
     <input type="text" id="nameInput" placeholder="Masukkan nama kamu..." />
