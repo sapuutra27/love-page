@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Halaman Romantis</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: \'Segoe UI\', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+    #inputContainer {
+      margin-bottom: 20px;
+    }
+    input, button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #ff5c8a;
+      color: white;
+      cursor: pointer;
+    }
+    .sticker {
+      width: 100px;
+      margin: 20px 0;
+      display: none;
+    }
+    #text {
+      font-size: 20px;
+      opacity: 0;
+      transition: opacity 2s ease;
+      padding: 0 20px;
+      max-width: 600px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="inputContainer">
+    <p>Hai kamu, siapa namamu?</p>
+    <input type="text" id="nameInput" placeholder="Masukkan nama kamu..." />
+    <button onclick="start()">Mulai</button>
+  </div>
+
+  <img src="kwon1.png" alt="Kwon Yuli" class="sticker" id="topSticker">
+  <div id="text"></div>
+
+  <audio autoplay loop>
+    <source src="bgmusic.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <script>
+    const textEl = document.getElementById(\'text\');
+    const topSticker = document.getElementById(\'topSticker\');
+    const inputContainer = document.getElementById(\'inputContainer\');
+    const nameInput = document.getElementById(\'nameInput\');
+
+    let i = 0;
+    let texts = [];
+
+    function start() {
+      const name = nameInput.value.trim() || "Kamu";
+
+      texts = [
+        `Hai ${name}, ada sesuatu yang ingin aku sampaikan...`,
+        "Tiap pagi bangun dan tau kamu masih ada, itu berkah buat aku.",
+        "Kadang kita gak harus ngapa-ngapain, cuma duduk bareng aja udah cukup.",
+        "Kamu tau nggak? Senyummu itu bisa ngubah hariku yang kelabu jadi cerah.",
+        "Aku gak nyari yang sempurna. Aku cuma nyari kamu, yang sederhana tapi ngena.",
+        "Kita mungkin gak selalu sepakat, tapi kita selalu nyoba ngerti satu sama lain.",
+        "Aku suka saat kita ngobrol lama banget sampe lupa waktu.",
+        "Dan aku suka juga saat kita diem bareng, tapi rasanya tetep deket.",
+        "Kamu tuh bukan cuma pacar, kamu juga sahabat terbaikku.",
+        "Dunia ini luas, tapi hati aku sempit karena isinya cuma kamu.",
+        "Aku harap kamu bisa ngerasain betapa berharganya kamu buat aku.",
+        "Teruslah jadi kamu, karena aku jatuh cinta sama semua yang kamu bawa.",
+"Kadang aku mikir, gimana ya hidupku kalau gak ketemu kamu dulu?",
+"Aku mungkin tetep jalan, tapi gak seindah sekarang.",
+"Kita udah lewatin banyak, dari yang bikin senyum sampe air mata.",
+"Dan setiap momen itu justru bikin kita makin kuat.",
+"Aku inget saat kamu capek, tapi masih sempet tanya aku udah makan belum.",
+"Aku inget saat kamu marah, tapi akhirnya kita saling minta maaf.",
+"Aku inget semua usaha kecilmu yang ternyata punya makna besar buatku.",
+"Kita bukan pasangan sempurna, tapi aku bangga bisa jadi bagian dari kita.",
+"Aku pengen jadi tempat kamu cerita, sandaran kamu pas capek, dan alasan kamu buat tetap semangat.",
+"Nanti, saat kita udah tua, aku pengen cerita semua ini ke anak cucu kita.",
+"Gimana lucunya kita saling ngejek, tapi gak pernah ninggalin.",
+"Gimana kita saling ngerti, walau gak selalu ngucapin.",
+"Gimana kita tetap bareng, meski dunia berubah cepat.",
+"Dan saat malam sunyi, aku bakal bisikin ke kamu, kayak sekarang...",
+\'Aku cinta kamu, sekarang, besok, dan seterusnya.\'
+
+        "Aku seneng banget bisa lewatin hari-hari bareng kamu.",
+        "Dari yang receh, sampe hal paling serius, kamu selalu ada.",
+        "Kamu tuh... rumah, tempat paling nyaman buat aku pulang.",
+        "Aku suka caramu ketawa, caramu marah-marah lucu, semuanya.",
+        "Kita banyak momen bareng, dan aku pengen terus nambahin lebih banyak lagi.",
+        "Kalau hari aku berat, kamu selalu jadi alasanku semangat.",
+        "Aku bersyukur setiap hari karena ada kamu di sisiku.",
+        "Terima kasih ya, udah tetap tinggal dan gak pernah nyerah.",
+        "Aku sayang kamu. Bener-bener sayang.",
+        "Makasih ya udah jadi bagian dari hidupku yang paling indah.",
+        "Yuk terus bareng, sampe nanti-nanti."
+      ];
+
+      const audio = new Audio(\'bgmusic.mp3\');
+      audio.loop = true;
+      audio.play();
+
+      inputContainer.style.display = \'none\';
+      topSticker.style.display = \'block\';
+      textEl.style.display = \'block\';
+      textEl.textContent = texts[0];
+      textEl.style.opacity = 1;
+      i = 1;
+
+      setInterval(showNext, 7000);
+    }
+
+    function showNext() {
+      textEl.style.opacity = 0;
+      setTimeout(() => {
+        textEl.textContent = texts[i];
+        textEl.style.opacity = 1;
+        i = (i + 1) % texts.length;
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
