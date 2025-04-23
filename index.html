@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <title>Favorite Lesson</title>
@@ -57,17 +55,11 @@
     <p>Hai kamu, siapa namamu?</p>
     <input type="text" id="nameInput" placeholder="Masukkan nama kamu..." />
     <button onclick="start()">Mulai</button>
-  </div>
-
-  <img src="" alt="Stiker" class="sticker" id="topSticker">
-  <div id="text"></div>
-
-  <audio id="bgm" loop>
+  </div>  <img src="" alt="Stiker" class="sticker" id="topSticker">
+  <div id="text"></div>  <audio id="bgm" loop>
     <source src="bgmusic.mp3" type="audio/mpeg">
     Browser kamu tidak mendukung audio.
-  </audio>
-
-  <script>
+  </audio>  <script>
     const textEl = document.getElementById('text');
     const topSticker = document.getElementById('topSticker');
     const inputContainer = document.getElementById('inputContainer');
@@ -81,8 +73,17 @@
       "cat6.png", "cat7.png", "cat8.png", "cat9.png", "cat10.png"
     ];
 
+    if (localStorage.getItem('nameEntered') === 'true') {
+      inputContainer.style.display = 'none';
+      topSticker.style.display = 'block';
+      textEl.style.display = 'block';
+      start();
+    }
+
     function start() {
       const name = nameInput.value.trim() || "Kamu";
+
+      localStorage.setItem('nameEntered', 'true');
 
       texts = [
         `Hai ${name}, ada sesuatu yang ingin aku sampaikan...`,
@@ -107,7 +108,8 @@
         "Terima kasih ya, udah tetap tinggal dan gak pernah nyerah.",
         "Aku sayang kamu. Bener-bener sayang.",
         "Makasih ya udah jadi bagian dari hidupku yang paling indah.",
-        "Yuk terus bareng, sampe nanti-nanti."
+        "Yuk terus bareng, sampe nanti-nanti.",
+        "-favorite lesson"
       ];
 
       try {
@@ -129,13 +131,23 @@
       topSticker.classList.remove("show");
 
       setTimeout(() => {
-        textEl.textContent = texts[i];
-        topSticker.src = stickers[i % stickers.length];
+        const currentText = texts[i];
+        textEl.textContent = currentText;
+
+        if (currentText === "-favorite lesson") {
+          textEl.style.textAlign = 'center';
+          topSticker.style.display = 'none';
+          localStorage.removeItem('nameEntered');
+        } else {
+          textEl.style.textAlign = 'left';
+          topSticker.style.display = 'block';
+          topSticker.src = stickers[i % stickers.length];
+        }
+
         textEl.classList.add("show");
         topSticker.classList.add("show");
         i = (i + 1) % texts.length;
       }, 1000);
     }
-  </script>
-</body>
+  </script></body>
 </html>
