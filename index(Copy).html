@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Favorite Lesson</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+    #inputContainer {
+      margin-bottom: 20px;
+    }
+    input, button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background-color: black;
+      color: white;
+      cursor: pointer;
+    }
+    .sticker {
+      width: 100px;
+      margin: 20px 0;
+      opacity: 0;
+      transition: opacity 2s ease;
+      display: none;
+    }
+    .show {
+      opacity: 1 !important;
+    }
+    #text {
+      font-size: 20px;
+      opacity: 0;
+      transition: opacity 2s ease;
+      padding: 0 20px;
+      max-width: 600px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="inputContainer">
+    <p>Hai kamu, siapa namamu?</p>
+    <input type="text" id="nameInput" placeholder="Masukkan nama kamu..." />
+    <button onclick="start()">Mulai</button>
+  </div>  <img src="" alt="Stiker" class="sticker" id="topSticker">
+  <div id="text"></div>  <audio id="bgm" loop>
+    <source src="bgmusic.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>  <script>
+    const textEl = document.getElementById('text');
+    const topSticker = document.getElementById('topSticker');
+    const inputContainer = document.getElementById('inputContainer');
+    const nameInput = document.getElementById('nameInput');
+    const bgm = document.getElementById('bgm');
+
+    let i = 0;
+    let texts = [];
+    const stickers = [
+      "cat1.png", "cat2.png", "cat3.png", "cat4.png", "cat5.png",
+      "cat6.png", "cat7.png", "cat8.png", "cat9.png", "cat10.png"
+    ];
+
+    if (localStorage.getItem('nameEntered') === 'true') {
+      inputContainer.style.display = 'none';
+      topSticker.style.display = 'block';
+      textEl.style.display = 'block';
+      start();
+    }
+
+    function start() {
+      const name = nameInput.value.trim() || "Kamu";
+
+      localStorage.setItem('nameEntered', 'true');
+
+      texts = [
+        `Hai ${name}, ada sesuatu yang ingin aku sampaikan...`,
+        "Tiap pagi bangun dan tau kamu masih ada, itu berkah buat aku.",
+        "Kadang kita gak harus ngapa-ngapain, cuma duduk bareng aja udah cukup.",
+        "Kamu tau nggak? Senyummu itu bisa ngubah hariku yang kelabu jadi cerah.",
+        "Aku gak nyari yang sempurna. Aku cuma nyari kamu, yang sederhana tapi ngena.",
+        "Kita mungkin gak selalu sepakat, tapi kita selalu nyoba ngerti satu sama lain.",
+        "Aku suka saat kita ngobrol lama banget sampe lupa waktu.",
+        "Dan aku suka juga saat kita diem bareng, tapi rasanya tetep deket.",
+        "Kamu tuh bukan cuma pacar, kamu juga sahabat terbaikku.",
+        "Dunia ini luas, tapi hati aku sempit karena isinya cuma kamu.",
+        "Aku harap kamu bisa ngerasain betapa berharganya kamu buat aku.",
+        "Teruslah jadi kamu, karena aku jatuh cinta sama semua yang kamu bawa.",
+        "Aku seneng banget bisa lewatin hari-hari bareng kamu.",
+        "Dari yang receh, sampe hal paling serius, kamu selalu ada.",
+        "Kamu tuh... rumah, tempat paling nyaman buat aku pulang.",
+        "Aku suka caramu ketawa, caramu marah-marah lucu, semuanya.",
+        "Kita banyak momen bareng, dan aku pengen terus nambahin lebih banyak lagi.",
+        "Kalau hari aku berat, kamu selalu jadi alasanku semangat.",
+        "Aku bersyukur setiap hari karena ada kamu di sisiku.",
+        "Terima kasih ya, udah tetap tinggal dan gak pernah nyerah.",
+        "Aku sayang kamu. Bener-bener sayang.",
+        "Makasih ya udah jadi bagian dari hidupku yang paling indah.",
+        "Yuk terus bareng, sampe nanti-nanti.",
+        "-favorite lesson"
+      ];
+
+      try {
+        bgm.play().catch(err => console.log("Autoplay blocked:", err));
+      } catch (e) {
+        console.log("Audio error:", e);
+      }
+
+      inputContainer.style.display = 'none';
+      topSticker.style.display = 'block';
+      textEl.style.display = 'block';
+
+      showNext();
+      setInterval(showNext, 7000);
+    }
+
+    function showNext() {
+      textEl.classList.remove("show");
+      topSticker.classList.remove("show");
+
+      setTimeout(() => {
+        const currentText = texts[i];
+        textEl.textContent = currentText;
+
+        if (currentText === "-favorite lesson") {
+          textEl.style.textAlign = 'center';
+          topSticker.style.display = 'none';
+          localStorage.removeItem('nameEntered');
+        } else {
+          textEl.style.textAlign = 'left';
+          topSticker.style.display = 'block';
+          topSticker.src = stickers[i % stickers.length];
+        }
+
+        textEl.classList.add("show");
+        topSticker.classList.add("show");
+        i = (i + 1) % texts.length;
+      }, 1000);
+    }
+  </script></body>
+</html>
